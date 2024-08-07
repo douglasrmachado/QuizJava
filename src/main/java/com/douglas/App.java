@@ -1,84 +1,156 @@
 package com.douglas;
 
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 
 /**
  * JavaFX App
  */
 public class App extends Application {
 
+    private ControladorQuiz controladorQuiz;
+
+    private VBox root;
+    private Scene cena;
+    private Text enunciado;
+    private Button alternativa1;
+    private Button alternativa2;
+    private Button alternativa3;
+    private Button alternativa4;
+    private Button alternativa5;
+    private Text resultado;
+    private Button proxima;
+
     @Override
-    public void start(Stage stage) {
-        VBox root = new VBox();
+    public void init() throws Exception {
+        super.init();
 
-        Text enunciado = new Text("Pergunta 1/4: Qual a capital de São Paulo?");
-        root.getChildren().add(enunciado);
+        ArrayList<Questao> lista = new ArrayList<>();
+
+        lista.add(new Questao("Qual a cor favorita da prof?", "rosa",
+                new String[] { "preto", "laranja", "roxo", "vermelho" }));
+        lista.add(new Questao("Qual a cor favorita da prof 2?", "verde",
+                new String[] { "preto", "laranja", "roxo", "vermelho" }));
+        lista.add(new Questao("Qual a cor favorita da prof? 3", "azul",
+                new String[] { "preto", "laranja", "roxo", "vermelho" }));
+        lista.add(new Questao("Qual a cor favorita da prof? 4", "cinza",
+                new String[] { "preto", "laranja", "roxo", "vermelho" }));
+        lista.add(new Questao("Qual a cor favorita da prof? 5", "marrom",
+                new String[] { "preto", "laranja", "roxo", "vermelho" }));
         
-        Button alternativa1 = new Button("Floripa");
-        root.getChildren().add(alternativa1);
 
-        alternativa1.setOnAction(this::respondeQuestao1);
+        controladorQuiz = new ControladorQuiz(lista);
 
-        Button alternativa2 = new Button("Rio de Janeiro");
-        root.getChildren().add(alternativa2);
+    }
 
-        alternativa2.setOnAction(this::respondeQuestao2);
+    @Override
+    public void start(Stage stage) throws Exception {
 
-        Button alternativa3 = new Button("Campo Grande");
-        root.getChildren().add(alternativa3);
+        inicializaComponente();
+        atualizaComponentes();
 
-        alternativa3.setOnAction(this::respondeQuestao3);
+        cena = new Scene(root, 500, 300);
 
-        Button alternativa4 = new Button("São Paulo");
-        root.getChildren().add(alternativa4);
-
-        alternativa4.setOnAction(this::respondeQuestao4);
-
-        Text enunciado2 = new Text("ACERTOU MUITO!");
-        root.getChildren().add(enunciado2);
-
-        Button alternativa5 = new Button("Próxima");
-        root.getChildren().add(alternativa5);
-
-        alternativa5.setOnAction(this::respondeQuestao);
-
-        root.setStyle("-fx-background-color: purple");
-        Scene scene = new Scene(root,600,800);
-        stage.setScene(scene);
+        stage.setScene(cena);
         stage.show();
+        root.setStyle("-fx-background-color: CC00FF");
     }
 
-    private void respondeQuestao(Event event) {
-        System.out.println("CLICOU EM PRÓXIMA");
+    @SuppressWarnings("unchecked")
+    public void inicializaComponente(){
+
+        enunciado = new Text("Enunciado");
+        alternativa1 = new Button("Questão 1");
+        alternativa2 = new Button("Questão 2");
+        alternativa3 = new Button("Questão 3");
+        alternativa4 = new Button("Questão 4");
+        alternativa5 = new Button("Questão 5");
+        resultado = new Text("O resultado aparecerá aqui.");
+        proxima = new Button("Próxima ->");
+
+        root = new VBox();
+        root.getChildren().add(enunciado);
+        root.setAlignment(Pos.CENTER);
+        root.setSpacing(10.0);
+
+        root.getChildren().add(alternativa1);
+        root.getChildren().add(alternativa2);
+        root.getChildren().add(alternativa3);
+        root.getChildren().add(alternativa4);
+        root.getChildren().add(alternativa5);
+        root.getChildren().add(resultado);
+        root.getChildren().add(proxima);
+
+        alternativa1.setOnAction(respondeQuestao());
+        alternativa2.setOnAction(respondeQuestao());
+        alternativa3.setOnAction(respondeQuestao());
+        alternativa4.setOnAction(respondeQuestao());
+        alternativa5.setOnAction(respondeQuestao());
+        proxima.setOnAction(respondeQuestao());
+
     }
 
-    private void respondeQuestao1(Event event) {
-        System.out.println("CLICOU NO BOTÃO 1");
+    public void atualizaComponentes(){
+
+        Questao objQuestao = controladorQuiz.getQuestao();
+        ArrayList<String> questoes = objQuestao.getTodasAlternativas();
+
+        alternativa1.setText(questoes.get(0));
+        alternativa2.setText(questoes.get(1));
+        alternativa3.setText(questoes.get(2));
+        alternativa4.setText(questoes.get(3));
+        alternativa5.setText(questoes.get(4));
+
+
     }
 
-    private void respondeQuestao2(Event event) {
-        System.out.println("CLICOU NO BOTÃO 2");
+
+    @SuppressWarnings("rawtypes")
+    private EventHandler respondeQuestao(){
+        return new EventHandler<Event>(){
+            @Override
+            public void handle(Event event){
+                //Button clicado = (Button)event.getSource();
+                Button clicado = (Button) event.getSource();
+                String alternativa = clicado.getText();
+
+                boolean result = controladorQuiz.respondeQuestao(alternativa);
+
+                if(result){
+                    resultado.setText("Acertou paizão!");
+                }else {
+                    resultado.setText("Errou paizão!");
+                }
+            }
+        };
     }
 
-    private void respondeQuestao3(Event event) {
-        System.out.println("CLICOU NO BOTÃO 3");
-    }
-
-    private void respondeQuestao4(Event event) {
-        System.out.println("CLICOU NO BOTÃO 4");
+    @SuppressWarnings("rawtypes")
+    private EventHandler proximaQuestao(){
+        return new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                // Tem próxima questão?
+                if (controladorQuiz.temProximaQuestao()){
+                    controladorQuiz.proximaQuestao();
+                    atualizaComponentes();
+                }
+                // Se sim muda para a próxima e atualiza a tela
+            }
+        };
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 
 }

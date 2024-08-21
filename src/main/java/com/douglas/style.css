@@ -1,9 +1,18 @@
+.background {
+    -fx-background-color: #ffd55a;
+}
+
+.enunciado {
+    -fx-font-size: 20px;
+    -fx-fill: #FFFFFF; 
+}
+
 .botao {
-    -fx-base: rgb(255, 4, 88);
+    -fx-base: #1d42c2;
     -fx-text-fill: white;
     
 }
 
-.background {
-    background-color: purple;
+.botao:hover {
+    -fx-background-color: #6dd47e;
 }

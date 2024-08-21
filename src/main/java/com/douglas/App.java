@@ -29,6 +29,9 @@ public class App extends Application {
     private Button alternativa5;
     private Text resultado;
     private Button proxima;
+    private Text acertos;
+    private Text erros;
+    private Button btReiniciar;
 
     @Override
     public void init() throws Exception {
@@ -58,19 +61,21 @@ public class App extends Application {
         inicializaComponente();
         atualizaComponentes();
 
-        cena = new Scene(root, 500, 300);
+        cena = new Scene(root, 1280, 720);
 
         cena.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         
         stage.setScene(cena);
         stage.show();
-        root.setStyle("-fx-background-color: CC00FF");
+        root.getStyleClass().add("background");
+        root.getStyleClass().add("enunciado");
+        
     }
 
     @SuppressWarnings("unchecked")
     public void inicializaComponente(){
 
-        enunciado = new Text("Enunciado");
+        enunciado = new Text("enunciado");
         alternativa1 = new Button("Questão 1");
         alternativa2 = new Button("Questão 2");
         alternativa3 = new Button("Questão 3");
@@ -78,6 +83,10 @@ public class App extends Application {
         alternativa5 = new Button("Questão 5");
         resultado = new Text("O resultado aparecerá aqui.");
         proxima = new Button("Próxima ->");
+        acertos = new Text("Acertos:");
+        erros = new Text("Erros:");
+        btReiniciar = new Button("REINICIAR");
+
 
         root = new VBox();
         root.getChildren().add(enunciado);
@@ -91,6 +100,11 @@ public class App extends Application {
         root.getChildren().add(alternativa5);
         root.getChildren().add(resultado);
         root.getChildren().add(proxima);
+        root.getChildren().add(acertos);
+        root.getChildren().add(erros);
+        root.getChildren().add(btReiniciar);
+
+
         
         alternativa1.getStyleClass().add("botao");
         alternativa2.getStyleClass().add("botao");
@@ -98,32 +112,54 @@ public class App extends Application {
         alternativa4.getStyleClass().add("botao");
         alternativa5.getStyleClass().add("botao");
         proxima.getStyleClass().add("botao");
+        btReiniciar.getStyleClass().add("botao");
 
         alternativa1.setOnAction(respondeQuestao());
         alternativa2.setOnAction(respondeQuestao());
         alternativa3.setOnAction(respondeQuestao());
         alternativa4.setOnAction(respondeQuestao());
         alternativa5.setOnAction(respondeQuestao());
-        proxima.setOnAction(respondeQuestao());
+        proxima.setOnAction(proximaQuestao());
+        btReiniciar.setOnAction(reiniciar());
 
     }
 
     public void atualizaComponentes(){
 
+
         Questao objQuestao = controladorQuiz.getQuestao();
         ArrayList<String> questoes = objQuestao.getTodasAlternativas();
-
+        enunciado.setText(objQuestao.getEnunciado());
         alternativa1.setText(questoes.get(0));
         alternativa2.setText(questoes.get(1));
         alternativa3.setText(questoes.get(2));
         alternativa4.setText(questoes.get(3));
         alternativa5.setText(questoes.get(4));
 
-        resultado.setVisible(false);
+        alternativa1.setVisible(true);
+        alternativa2.setVisible(true);
+        alternativa3.setVisible(true);
+        alternativa4.setVisible(true);
+        alternativa5.setVisible(true);
+
+        acertos.setText("Acertos: " + String.valueOf(controladorQuiz.getAcertos()));
+        erros.setText("Erros: " + String.valueOf(controladorQuiz.getErros()));
+
+        btReiniciar.setVisible(false);
         proxima.setVisible(false);
 
     }
 
+    public void acabouJogo() {
+        enunciado.setVisible(false);
+        alternativa1.setVisible(false);
+        alternativa2.setVisible(false);
+        alternativa3.setVisible(false);
+        alternativa4.setVisible(false);
+        alternativa5.setVisible(false);
+        proxima.setVisible(false);
+        btReiniciar.setVisible(true);
+    }
 
     @SuppressWarnings("rawtypes")
     private EventHandler respondeQuestao(){
@@ -141,9 +177,14 @@ public class App extends Application {
                 }else {
                     resultado.setText("Errou paizão!");
                 }
-
                 resultado.setVisible(true);
                 proxima.setVisible(true);
+
+                alternativa1.setVisible(alternativa1 == clicado);
+                alternativa2.setVisible(alternativa2 == clicado);
+                alternativa3.setVisible(alternativa3 == clicado);
+                alternativa4.setVisible(alternativa4 == clicado);
+                alternativa5.setVisible(alternativa5 == clicado);
             }
         };
     }
@@ -157,11 +198,40 @@ public class App extends Application {
                 if (controladorQuiz.temProximaQuestao()){
                     controladorQuiz.proximaQuestao();
                     atualizaComponentes();
+                } else {
+                    if(controladorQuiz.getAcertos() > 3){
+                        resultado.setText("VOCÊ GANHOU!");
+                    } else {
+                        resultado.setText("VOCÊ PERDEU!");
+                    }
+                    atualizaComponentes();
+                    acabouJogo();
                 }
                 // Se sim muda para a próxima e atualiza a tela
             }
         };
     }
+    @SuppressWarnings("rawtypes")
+    private EventHandler reiniciar(){
+        return new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                controladorQuiz.reiniciar();
+                enunciado.setVisible(true);
+                alternativa1.setVisible(true);
+                alternativa2.setVisible(true);
+                alternativa3.setVisible(true);
+                alternativa4.setVisible(true);
+                alternativa5.setVisible(true);
+                resultado.setVisible(false);
+                proxima.setVisible(false);
+                btReiniciar.setVisible(false);
+                atualizaComponentes();
+
+            }
+        };
+    }
+
 
     public static void main(String[] args) {
         launch(args);

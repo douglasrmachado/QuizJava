@@ -1,0 +1,9 @@
+.botao {
+    -fx-base: rgb(255, 4, 88);
+    -fx-text-fill: white;
+    
+}
+
+.background {
+    background-color: purple;
+}

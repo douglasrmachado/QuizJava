@@ -36,7 +36,7 @@ public class App extends Application {
 
         ArrayList<Questao> lista = new ArrayList<>();
 
-        lista.add(new Questao("Qual a cor favorita da prof?", "rosa",
+        lista.add(new Questao("Qual a cor favorita da prof?", "pink",
                 new String[] { "preto", "laranja", "roxo", "vermelho" }));
         lista.add(new Questao("Qual a cor favorita da prof 2?", "verde",
                 new String[] { "preto", "laranja", "roxo", "vermelho" }));
@@ -60,6 +60,8 @@ public class App extends Application {
 
         cena = new Scene(root, 500, 300);
 
+        cena.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        
         stage.setScene(cena);
         stage.show();
         root.setStyle("-fx-background-color: CC00FF");
@@ -89,6 +91,13 @@ public class App extends Application {
         root.getChildren().add(alternativa5);
         root.getChildren().add(resultado);
         root.getChildren().add(proxima);
+        
+        alternativa1.getStyleClass().add("botao");
+        alternativa2.getStyleClass().add("botao");
+        alternativa3.getStyleClass().add("botao");
+        alternativa4.getStyleClass().add("botao");
+        alternativa5.getStyleClass().add("botao");
+        proxima.getStyleClass().add("botao");
 
         alternativa1.setOnAction(respondeQuestao());
         alternativa2.setOnAction(respondeQuestao());
@@ -110,6 +119,8 @@ public class App extends Application {
         alternativa4.setText(questoes.get(3));
         alternativa5.setText(questoes.get(4));
 
+        resultado.setVisible(false);
+        proxima.setVisible(false);
 
     }
 
@@ -130,6 +141,9 @@ public class App extends Application {
                 }else {
                     resultado.setText("Errou paizão!");
                 }
+
+                resultado.setVisible(true);
+                proxima.setVisible(true);
             }
         };
     }

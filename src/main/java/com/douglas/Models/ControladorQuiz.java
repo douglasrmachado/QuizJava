@@ -71,4 +71,9 @@ public class ControladorQuiz {
     public void setQuestaoAtual(int questaoAtual) {
         this.questaoAtual = questaoAtual;
     }
+
+    // Metodos do CRUD
+    public void adicionarQuestao(Questao questao){
+        questoes.add(questao);
+    }
 }

@@ -1,4 +1,4 @@
-package com.douglas;
+package com.douglas.Models;
 
 import java.util.ArrayList;
 import java.util.Collections;

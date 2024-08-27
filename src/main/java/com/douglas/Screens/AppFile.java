@@ -1,4 +1,4 @@
-package com.douglas;
+package com.douglas.Screens;
 
 public class AppFile {
     

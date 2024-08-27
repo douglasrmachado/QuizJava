@@ -2,6 +2,9 @@ package com.douglas;
 
 import java.util.ArrayList;
 
+import com.douglas.Models.ControladorQuiz;
+import com.douglas.Models.Questao;
+
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.event.EventHandler;

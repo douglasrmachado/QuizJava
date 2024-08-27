@@ -14,8 +14,7 @@ public class App extends BaseAppNavigator{
     public void init() throws Exception {
         super.init();
         ArrayList<Questao> lista = new ArrayList<>();
-        // APAGAR ISSO AQUI EM
-        lista.add(new Questao("Qual a capital do Paraná?", "Curitiba", new String[]{"Floripa", "Porto Alegre", "São Paulo", "pau"}));
+        // lista.add(new Questao("Qual a capital do Paraná?", "Curitiba", new String[]{"Floripa", "Porto Alegre", "São Paulo", "pau"}));
         controladorQuiz = new ControladorQuiz(lista);
     }
 

@@ -31,12 +31,13 @@ public class TelaQuiz {
     private Button btReiniciar;
     private Button btMenu;
 
-    public TelaQuiz(ControladorQuiz controladorQuiz){
-        // Fazer try catch para n permitir ir para tela sem perguntas
+    public TelaQuiz(ControladorQuiz controladorQuiz) {
         this.controladorQuiz = controladorQuiz;
+        controladorQuiz.lerQuestoes();
         inicializaComponente();
         atualizaComponentes();
     }
+    
 
     @SuppressWarnings("unused")
     private void start(Stage stage) throws Exception {
@@ -203,6 +204,7 @@ public class TelaQuiz {
             }
         };
     }
+    
     @SuppressWarnings("rawtypes")
     private EventHandler reiniciar(){
         return new EventHandler<Event>() {
@@ -223,6 +225,7 @@ public class TelaQuiz {
             }
         };
     }
+    
     public VBox getRoot(){
         return root;
     }

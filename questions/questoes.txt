@@ -1,0 +1,8 @@
+Enunciado: Fandango é bom?
+Correta: sim
+Outras Alternativas:
+- nao
+- com certeza
+- eu amo
+- oi
+

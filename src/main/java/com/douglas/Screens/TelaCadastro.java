@@ -1,6 +1,11 @@
 package com.douglas.Screens;
 
 import com.douglas.Models.*;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import com.douglas.*;
 import javafx.event.Event;
 import javafx.geometry.Pos;
@@ -92,7 +97,23 @@ public class TelaCadastro {
 
         limpaTextField();
 
+        salvarQuestaoNoArquivo(questao);
+
     }
+    
+    private void salvarQuestaoNoArquivo(Questao questao) {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("questions/questoes.txt", true))) {
+        writer.write("Enunciado: " + questao.getEnunciado() + "\n");
+        writer.write("Correta: " + questao.getRespostaCorreta() + "\n");
+        writer.write("Outras Alternativas:\n");
+        for (String alternativa : questao.getOutrasAlternativas()) {
+            writer.write("- " + alternativa + "\n");
+        }
+        writer.write("\n");
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
 
     private void retornarMenu(Event event){
         App.popScreen();
@@ -101,5 +122,4 @@ public class TelaCadastro {
     public VBox getRoot() {
         return root;
     }
-    
 }

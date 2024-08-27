@@ -1,19 +1,23 @@
 package com.douglas.Models;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class ControladorQuiz {
-
     private ArrayList<Questao> questoes;
     private int questaoAtual;
     private int acertos;
     private int erros;
 
     public ControladorQuiz(ArrayList<Questao> questoes) {
-        this.questoes = questoes;
+        this.questoes = questoes != null ? questoes : new ArrayList<>();
+        lerQuestoes(); 
         reiniciar();
     }
+    
 
     public void reiniciar() {
         Collections.shuffle(this.questoes);
@@ -36,7 +40,46 @@ public class ControladorQuiz {
     }
 
     public Questao getQuestao() {
-        return this.questoes.get(questaoAtual);
+        if (questaoAtual >= 0 && questaoAtual < this.questoes.size()) {
+            return this.questoes.get(questaoAtual);
+        } else {
+            throw new IndexOutOfBoundsException("Nenhuma questão disponível ou índice fora do alcance.");
+        }
+    }
+
+    public void lerQuestoes() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("questions/questoes.txt"))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                // Ler e processar o enunciado
+                String enunciado = linha.substring(linha.indexOf(":") + 2);
+    
+                // Ler e processar a resposta correta
+                linha = reader.readLine();
+                String correta = linha.substring(linha.indexOf(":") + 2);
+    
+                // Ler e processar as outras alternativas
+                ArrayList<String> outras = new ArrayList<>();
+                reader.readLine(); // Ignorar a linha "Outras Alternativas:"
+                for (int i = 0; i < 4; i++) {
+                    linha = reader.readLine();
+                    if (linha != null && !linha.isEmpty()) {
+                        outras.add(linha.substring(2));
+                    }
+                }
+    
+                // Criar a questão e adicionar ao controlador
+                String[] outrasArray = new String[outras.size()];
+                outras.toArray(outrasArray);
+                Questao questao = new Questao(enunciado, correta, outrasArray);
+                adicionarQuestao(questao);
+    
+                // Ignorar a linha em branco entre as questões
+                reader.readLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean respondeQuestao(String alternativa) {

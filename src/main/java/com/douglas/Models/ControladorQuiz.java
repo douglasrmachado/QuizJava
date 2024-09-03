@@ -6,19 +6,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/* AQUI QUE VAMO MANIPULAR OS DADOS DO APP */
 public class ControladorQuiz {
     private ArrayList<Questao> questoes;
     private int questaoAtual;
     private int acertos;
     private int erros;
 
+    /* AQUI ELE CONFIGURA A LISTA DE QUESTOES, REINICIA O ESTADO DO QUIZ E CARREGA AS QUESTOES DE OUTRO DOCUMENTO */
     public ControladorQuiz(ArrayList<Questao> questoes) {
         this.questoes = questoes != null ? questoes : new ArrayList<>();
-        lerQuestoes(); 
         reiniciar();
+        lerQuestoes();
     }
     
-
+    /* AQUI É O MÉTODO REINICIAR PRA REINICIAR O QUIZ */
     public void reiniciar() {
         Collections.shuffle(this.questoes);
         setAcertos(0);
@@ -27,19 +29,25 @@ public class ControladorQuiz {
     }
 
     public int getTotalQuestao() {
-        return this.questoes.size() -1;
+        return this.questoes.size();
     }
 
     public boolean temProximaQuestao() {
-        return questaoAtual < getTotalQuestao();
+        return questaoAtual < getTotalQuestao() - 1;
     }
 
+    // AQUI VERIFICA SE TEM PROXIMAQUESTAO, SE SIM VAI PRA ELA
     public int proximaQuestao() {
-        this.questaoAtual += 1;
+        if(temProximaQuestao()) {
+            this.questaoAtual++;
+        }
         return this.questaoAtual;
     }
 
+    /* VERIFICA O INDICE DE QUAL QUESTAO O USUARIO ESTÁ RESPONDENDO NO MOMENTO */
     public Questao getQuestao() {
+
+        /* ESSE IF FAZ GARANTIR Q QUESTAOATUAL NAO SEJA NEGATIVA E NEM MAIOR Q O NUMERO DE QUESTOES ARMAZENADAS */
         if (questaoAtual >= 0 && questaoAtual < this.questoes.size()) {
             return this.questoes.get(questaoAtual);
         } else {
@@ -47,20 +55,22 @@ public class ControladorQuiz {
         }
     }
 
+    /* AQUI Q VAMO LER AS QUESTOES DO ARQUIVO TXT E BOTAR NO APP */
     public void lerQuestoes() {
         try (BufferedReader reader = new BufferedReader(new FileReader("questions/questoes.txt"))) {
             String linha;
+
+            // CADA LINHA É LIDA ATÉ Q NAO TENHAM MAIS LINHAS
             while ((linha = reader.readLine()) != null) {
-                // Ler e processar o enunciado
                 String enunciado = linha.substring(linha.indexOf(":") + 2);
     
-                // Ler e processar a resposta correta
+                // ARMAZENA LINHA CORRETA
                 linha = reader.readLine();
                 String correta = linha.substring(linha.indexOf(":") + 2);
     
-                // Ler e processar as outras alternativas
+                // ARRAYLIST PRA ARMAZENAR 4 ALT INCORRETAS
                 ArrayList<String> outras = new ArrayList<>();
-                reader.readLine(); // Ignorar a linha "Outras Alternativas:"
+                reader.readLine(); 
                 for (int i = 0; i < 4; i++) {
                     linha = reader.readLine();
                     if (linha != null && !linha.isEmpty()) {
@@ -68,13 +78,13 @@ public class ControladorQuiz {
                     }
                 }
     
-                // Criar a questão e adicionar ao controlador
+                // CRIA A QUESTÃO E ADICIONA NO CONTROLADOR
                 String[] outrasArray = new String[outras.size()];
                 outras.toArray(outrasArray);
                 Questao questao = new Questao(enunciado, correta, outrasArray);
                 adicionarQuestao(questao);
     
-                // Ignorar a linha em branco entre as questões
+                // IGNORA A LINHA EM BRANCO ENTRE AS QUESTOES PRA PODER CONTINUAR
                 reader.readLine();
             }
         } catch (IOException e) {
@@ -82,13 +92,20 @@ public class ControladorQuiz {
         }
     }
 
+
+    /* AQUI PEGA O DADO DA RESPOSTA DO USUÁRIO E COLOCA EM ACERTO OU ERRO(TAMBÉM TEM UM PRINTLN PRA VER NO TERMINAL SE TÁ FUNFANDO) */
     public boolean respondeQuestao(String alternativa) {
+        boolean resultado;
         if (getQuestao().getRespostaCorreta().equals(alternativa)) {
             setAcertos(getAcertos() + 1);
-            return true;
+            resultado = true;
+            System.out.println("Resposta correta. Acertos: " + getAcertos());
+        } else {
+            setErros(getErros() + 1);
+            resultado = false;
+            System.out.println("Resposta incorreta. Erros: " + getErros());
         }
-        setErros(getErros() + 1);
-        return false;
+        return resultado;
     }
 
     public int getAcertos() {
@@ -115,7 +132,6 @@ public class ControladorQuiz {
         this.questaoAtual = questaoAtual;
     }
 
-    // Metodos do CRUD
     public void adicionarQuestao(Questao questao){
         questoes.add(questao);
     }

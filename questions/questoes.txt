@@ -1,8 +1,8 @@
-Enunciado: Fandango é bom?
-Correta: sim
+Enunciado: feaghaehahr
+Correta: fw
 Outras Alternativas:
-- nao
-- com certeza
-- eu amo
-- oi
+- gw
+- whw
+- hw
+- wh
 

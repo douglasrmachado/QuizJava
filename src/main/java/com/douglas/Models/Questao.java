@@ -10,6 +10,7 @@ public class Questao {
     private final String[] outrasAlternativas;
     private final ArrayList<String> todasAlternativas;
 
+    /* CONSTRUTOR DE QUESTAO */
     public Questao(String enunciado, String respostaCorreta, String[] outrasAlternativas) {
         this.enunciado = enunciado;
         this.respostaCorreta = respostaCorreta;
@@ -22,18 +23,22 @@ public class Questao {
         Collections.shuffle(todasAlternativas);
     }
 
+    /* RECEBE DADO DO ENUNCIADO */
     public String getEnunciado() {
         return enunciado;
     }
 
+    /* RECEBE DADO DA RESPOSTA CORRETA */
     public String getRespostaCorreta() {
         return respostaCorreta;
     }
 
+    /* RECEBE DADO DAS OUTRAS ALTERNATIVAS */
     public String[] getOutrasAlternativas() {
         return outrasAlternativas;
     }
 
+    /* LISTA DAS ALTERNATIVAS */
     public ArrayList<String> getTodasAlternativas() {
         return todasAlternativas;
     }

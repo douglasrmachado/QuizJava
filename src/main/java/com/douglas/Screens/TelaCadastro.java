@@ -52,11 +52,13 @@ public class TelaCadastro {
     private ControladorQuiz controladorQuiz;
 
     
-
+    /* CHAMA TELA CADASTRO  */
     public TelaCadastro(ControladorQuiz controladorQuiz){
         this.controladorQuiz = controladorQuiz;
     }
 
+
+    /* DEIXA LIMPO OS TEXTFIELD DPS DE SALVAR A QUESTAO */
     @FXML
     private void limpaTextField(){
         tfEnunciado.clear();
@@ -67,6 +69,7 @@ public class TelaCadastro {
         tfErrada4.clear();
     }
 
+    /* AQUI VAI CRIAR A QUESTAO E SALVAR NO ARQUIVO TXT */
     @FXML
     private void cadastrarQuestao(Event event){
         String enunciado = tfEnunciado.getText();
@@ -82,12 +85,14 @@ public class TelaCadastro {
         salvarQuestaoNoArquivo(questao);
     }
 
+    /* BOTAO DE RETORNAR MENU */
     @FXML
     private void retornarMenu(Event event){
         App.popScreen();
     }
 
 
+    /* LÓGICA PRA SALVAR QUESTAO NO ARQUIVO */
     private void salvarQuestaoNoArquivo(Questao questao) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("questions/questoes.txt", true))) {
             writer.write("Enunciado: " + questao.getEnunciado() + "\n");

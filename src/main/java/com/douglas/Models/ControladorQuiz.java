@@ -103,12 +103,14 @@ public class ControladorQuiz {
         if (getQuestao().getRespostaCorreta().equals(alternativa)) {
             setAcertos(getAcertos() + 1);
             resultado = true;
+            /* DEPURAÇÃO PRA VER SE TA FUNFANDO */
             System.out.println("Resposta correta. Acertos: " + getAcertos());
 
         /* SE A RESPOSTA É INCORRETA, ADICIONA 1 EM ERROS */
         } else {
             setErros(getErros() + 1);
             resultado = false;
+            /* DEPURAÇÃO PRA SABER SE TA FUNFANDO */
             System.out.println("Resposta incorreta. Erros: " + getErros());
         }
         return resultado;

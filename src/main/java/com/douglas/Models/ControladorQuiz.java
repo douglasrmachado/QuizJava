@@ -28,10 +28,12 @@ public class ControladorQuiz {
         setErros(0);
     }
 
+    // PEGA QUANTAS QUESTOES TEM NO TOTAL
     public int getTotalQuestao() {
         return this.questoes.size();
     }
 
+    // VERIFICA SE TEM QUESTAO DEPOIS DA QUESTAOATUAL
     public boolean temProximaQuestao() {
         return questaoAtual < getTotalQuestao() - 1;
     }
@@ -96,10 +98,14 @@ public class ControladorQuiz {
     /* AQUI PEGA O DADO DA RESPOSTA DO USUÁRIO E COLOCA EM ACERTO OU ERRO(TAMBÉM TEM UM PRINTLN PRA VER NO TERMINAL SE TÁ FUNFANDO) */
     public boolean respondeQuestao(String alternativa) {
         boolean resultado;
+
+        /* SE A RESPOSTA TÁ CORRETA, ADICIONA 1 EM ACERTOS */
         if (getQuestao().getRespostaCorreta().equals(alternativa)) {
             setAcertos(getAcertos() + 1);
             resultado = true;
             System.out.println("Resposta correta. Acertos: " + getAcertos());
+
+        /* SE A RESPOSTA É INCORRETA, ADICIONA 1 EM ERROS */
         } else {
             setErros(getErros() + 1);
             resultado = false;
@@ -108,30 +114,37 @@ public class ControladorQuiz {
         return resultado;
     }
 
+    // RETORNA O NUMERO ATUAL DE ACERTOS
     public int getAcertos() {
         return this.acertos;
     }
 
+    // DEFINE O NUMERO DE ACERTOS
     public void setAcertos(int acertos) {
         this.acertos = acertos;
     }
 
+    // RETORNA O NUMERO ATUAL DE ERROS
     public int getErros() {
         return this.erros;
     }
 
+    // DEFINE O NUMERO DE ERROS
     public void setErros(int erros) {
         this.erros = erros;
     }
 
+    // RETORNA O INDICE DA QUESTAOATUAL(em qual ela ta atualmente no app)
     public int getQuestaoAtual() {
         return this.questaoAtual;
     }
 
+    // DEFINE O INDICE DA QUESTAOATUAL(em qual ela ta atualmente no app)
     public void setQuestaoAtual(int questaoAtual) {
         this.questaoAtual = questaoAtual;
     }
 
+    // ADICIONA UMA NOVA QUESTAO A LISTA DE QUESTOES
     public void adicionarQuestao(Questao questao){
         questoes.add(questao);
     }

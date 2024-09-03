@@ -37,5 +37,4 @@ public class Questao {
     public ArrayList<String> getTodasAlternativas() {
         return todasAlternativas;
     }
-
 }

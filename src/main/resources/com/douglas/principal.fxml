@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.douglas.Screens.TelaPrincipal">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.douglas.Screens.TelaPrincipal">
    <children>
-      <Button layoutX="256.0" layoutY="147.0" mnemonicParsing="false" onAction="#abrirTelaQuiz" text="INICIAR QUIZ" />
-      <Button layoutX="110.0" layoutY="200.0" mnemonicParsing="false" onAction="#abrirTelaCadastro" prefHeight="153.0" prefWidth="379.0" text="CADASTRAR NOVA PERGUNTA">
+      <Button layoutX="411.0" layoutY="212.0" mnemonicParsing="false" onAction="#abrirTelaQuiz" prefHeight="128.0" prefWidth="265.0" text="INICIAR QUIZ" textFill="#400ca8">
          <font>
-            <Font size="22.0" />
-         </font></Button>
+            <Font name="OCR A Extended" size="24.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button layoutX="334.0" layoutY="391.0" mnemonicParsing="false" onAction="#abrirTelaCadastro" prefHeight="149.0" prefWidth="419.0" text="CADASTRAR NOVA PERGUNTA" textFill="#400ca8">
+         <font>
+            <Font name="OCR A Extended" size="24.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
    </children>
 </Pane>

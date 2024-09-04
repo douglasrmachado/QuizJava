@@ -1,35 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.douglas.Screens.TelaCadastro">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.douglas.Screens.TelaCadastro">
    <children>
-      <Button fx:id="btCadastrar" layoutX="120.0" layoutY="333.0" mnemonicParsing="false" onAction="#cadastrarQuestao" text="Cadastrar ">
+      <Button fx:id="btCadastrar" layoutX="237.0" layoutY="579.0" mnemonicParsing="false" onAction="#cadastrarQuestao" text="Cadastrar Pergunta " textFill="#400ca8">
          <font>
-            <Font size="18.0" />
+            <Font name="OCR A Extended" size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <Button fx:id="btCancelar" layoutX="375.0" layoutY="333.0" mnemonicParsing="false" onAction="#retornarMenu" text="Retornar ao Menu">
+      <Button fx:id="btCancelar" layoutX="667.0" layoutY="579.0" mnemonicParsing="false" onAction="#retornarMenu" prefHeight="32.0" prefWidth="231.0" text="Retornar ao Menu" textFill="#400ca8">
          <font>
-            <Font size="18.0" />
+            <Font name="OCR A Extended" size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <Label fx:id="lbEnunciado" layoutX="271.0" layoutY="34.0" text="Enunciado" />
-      <Label fx:id="lbCorreta" layoutX="255.0" layoutY="85.0" text="Resposta Correta" />
-      <Label fx:id="lbErrada1" layoutX="253.0" layoutY="129.0" text="Resposta Errada 1" />
-      <Label fx:id="lbErrada2" layoutX="252.0" layoutY="175.0" text="Resposta Errada 2" />
-      <Label fx:id="lbErrada4" layoutX="253.0" layoutY="275.0" text="Resposta Errada 4" />
-      <Label fx:id="lbErrada3" layoutX="252.0" layoutY="227.0" text="Resposta Errada 3" />
-      <TextField fx:id="tfCorreta" layoutX="226.0" layoutY="102.0" />
-      <TextField fx:id="tfErrada1" layoutX="225.0" layoutY="146.0" />
-      <TextField fx:id="tfErrada2" layoutX="226.0" layoutY="192.0" />
-      <TextField fx:id="tfErrada3" layoutX="225.0" layoutY="244.0" />
-      <TextField fx:id="tfErrada4" layoutX="226.0" layoutY="292.0" />
-      <TextField fx:id="tfEnunciado" layoutX="225.0" layoutY="51.0" />
+      <Label fx:id="lbEnunciado" layoutX="535.0" layoutY="73.0" text="Enunciado" textFill="#400ca8">
+         <font>
+            <Font name="OCR A Extended" size="12.0" />
+         </font></Label>
+      <Label fx:id="lbCorreta" layoutX="509.0" layoutY="153.0" text="Resposta Correta">
+         <font>
+            <Font name="OCR A Extended" size="12.0" />
+         </font></Label>
+      <Label fx:id="lbErrada1" layoutX="505.0" layoutY="227.0" text="Resposta Errada 1">
+         <font>
+            <Font name="OCR A Extended" size="12.0" />
+         </font></Label>
+      <Label fx:id="lbErrada2" layoutX="506.0" layoutY="307.0" text="Resposta Errada 2">
+         <font>
+            <Font name="OCR A Extended" size="12.0" />
+         </font></Label>
+      <Label fx:id="lbErrada4" layoutX="506.0" layoutY="467.0" text="Resposta Errada 4">
+         <font>
+            <Font name="OCR A Extended" size="12.0" />
+         </font></Label>
+      <Label fx:id="lbErrada3" layoutX="505.0" layoutY="384.0" text="Resposta Errada 3">
+         <font>
+            <Font name="OCR A Extended" size="12.0" />
+         </font></Label>
+      <TextField fx:id="tfCorreta" layoutX="468.0" layoutY="167.0" prefHeight="39.0" prefWidth="199.0">
+         <font>
+            <Font name="OCR A Extended" size="12.0" />
+         </font></TextField>
+      <TextField fx:id="tfErrada1" layoutX="468.0" layoutY="241.0" prefHeight="39.0" prefWidth="199.0">
+         <font>
+            <Font name="OCR A Extended" size="12.0" />
+         </font></TextField>
+      <TextField fx:id="tfErrada2" layoutX="468.0" layoutY="321.0" prefHeight="39.0" prefWidth="199.0">
+         <font>
+            <Font name="OCR A Extended" size="12.0" />
+         </font></TextField>
+      <TextField fx:id="tfErrada3" layoutX="468.0" layoutY="398.0" prefHeight="39.0" prefWidth="199.0">
+         <font>
+            <Font name="OCR A Extended" size="12.0" />
+         </font></TextField>
+      <TextField fx:id="tfErrada4" layoutX="468.0" layoutY="481.0" prefHeight="39.0" prefWidth="199.0">
+         <font>
+            <Font name="OCR A Extended" size="12.0" />
+         </font></TextField>
+      <TextField fx:id="tfEnunciado" layoutX="440.0" layoutY="87.0" prefHeight="25.0" prefWidth="256.0">
+         <font>
+            <Font name="OCR A Extended" size="12.0" />
+         </font></TextField>
    </children>
 </Pane>

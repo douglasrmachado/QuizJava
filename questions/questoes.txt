@@ -1,16 +1,8 @@
-Enunciado: feabfajgbajhb
-Correta: dwdw
+Enunciado: camaleão dourado?
+Correta: forte
 Outras Alternativas:
-- dw
-- fw
-- gw
-- gw
-
-Enunciado: dwafafeaag
-Correta: 1111111
-Outras Alternativas:
-- d
-- d
-- f
-- dw
+- antigo
+- velho
+- porco
+- fraco
 

@@ -111,6 +111,7 @@ public class TelaQuiz {
     private void handleReiniciarAction() {
         controladorQuiz.reiniciar();
         atualizaComponentes();
+
     }
 
     /* ESPERA AÇÃO DE VOLTAR AO MENU */

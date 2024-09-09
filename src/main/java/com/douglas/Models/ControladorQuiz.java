@@ -26,6 +26,7 @@ public class ControladorQuiz {
         setAcertos(0);
         setQuestaoAtual(0);
         setErros(0);
+
     }
 
     // PEGA QUANTAS QUESTOES TEM NO TOTAL
